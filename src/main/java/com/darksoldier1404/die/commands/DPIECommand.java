@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.darksoldier1404.die.ItemEditor.prefix;
+import static com.darksoldier1404.die.ItemEditor.*;
 
 public class DPIECommand {
     private final CommandBuilder builder = new CommandBuilder(prefix);
@@ -18,38 +18,38 @@ public class DPIECommand {
             if (args.length >= 2) {
                 DPIEFunction.setItemName(p, args);
             } else {
-                p.sendMessage(prefix + "Usage: /die name <item display name>");
+                p.sendMessage(prefix + lang.get("usage_name"));
             }
         });
         builder.addSubCommand("loreadd", "dpie.lore", "/dpie loreadd <item lore>", true, (p, args) -> {
             if (args.length >= 2) {
                 DPIEFunction.addItemLore(p, args);
             } else {
-                p.sendMessage(prefix + "Usage: /die loreadd <item lore>");
+                p.sendMessage(prefix + lang.get("usage_loreadd"));
             }
         });
         builder.addSubCommand("loreset", "dpie.lore", "/dpie loreset <index> <item lore>", true, (p, args) -> {
             if (args.length >= 3) {
                 String line = args[1];
                 if (!line.matches("\\d+")) {
-                    p.sendMessage(prefix + "§cInvalid index. Please provide a valid number.");
+                    p.sendMessage(prefix + lang.get("invalid_index"));
                     return;
                 }
                 DPIEFunction.setItemLore(p, line, args);
             } else {
-                p.sendMessage(prefix + "Usage: /die loreset <index> <item lore>");
+                p.sendMessage(prefix + lang.get("usage_loreset"));
             }
         });
         builder.addSubCommand("loredel", "dpie.lore", "/dpie loredel <index>", true, (p, args) -> {
             if (args.length >= 2) {
                 String line = args[1];
                 if (!line.matches("\\d+")) {
-                    p.sendMessage(prefix + "§cInvalid index. Please provide a valid number.");
+                    p.sendMessage(prefix + lang.get("invalid_index"));
                     return;
                 }
                 DPIEFunction.removeItemLore(p, line);
             } else {
-                p.sendMessage(prefix + "Usage: /die loredel <index>");
+                p.sendMessage(prefix + lang.get("usage_loredel"));
             }
         });
         builder.addSubCommand("loreclear", "dpie.lore", "/dpie loreclear", true, (p, args) -> {
@@ -60,7 +60,7 @@ public class DPIECommand {
             if (args.length >= 2) {
                 DPIEFunction.setItemType(p, args[1]);
             } else {
-                p.sendMessage(prefix + "Usage: /die type <item material>");
+                p.sendMessage(prefix + lang.get("usage_type"));
             }
         });
 
@@ -68,7 +68,7 @@ public class DPIECommand {
             if (args.length >= 2) {
                 DPIEFunction.setCustomModelData(p, args[1]);
             } else {
-                p.sendMessage(prefix + "Usage: /die custommodeldata <Integer>");
+                p.sendMessage(prefix + lang.get("usage_custommodeldata"));
             }
         });
 
@@ -76,7 +76,7 @@ public class DPIECommand {
             if (args.length >= 1) {
                 DPIEFunction.removeCustomModelData(p);
             } else {
-                p.sendMessage(prefix + "Usage: /die custommodeldataremove <Integer>");
+                p.sendMessage(prefix + lang.get("usage_custommodeldataremove"));
             }
         });
 
@@ -84,7 +84,7 @@ public class DPIECommand {
             if (args.length >= 3) {
                 DPIEFunction.addEnchantment(p, args[1], args[2]);
             } else {
-                p.sendMessage(prefix + "Usage: /die enchant <enchantment> <level>");
+                p.sendMessage(prefix + lang.get("usage_enchant"));
             }
         });
 
@@ -92,7 +92,7 @@ public class DPIECommand {
             if (args.length >= 2) {
                 DPIEFunction.removeEnchantment(p, args[1]);
             } else {
-                p.sendMessage(prefix + "Usage: /die enchantremove <enchantment>");
+                p.sendMessage(prefix + lang.get("usage_enchantremove"));
             }
         });
 
@@ -100,7 +100,7 @@ public class DPIECommand {
             if (args.length >= 2) {
                 DPIEFunction.addFlag(p, args[1]);
             } else {
-                p.sendMessage(prefix + "Usage: /die addflag <flag>");
+                p.sendMessage(prefix + lang.get("usage_addflag"));
             }
         });
 
@@ -108,16 +108,15 @@ public class DPIECommand {
             if (args.length >= 2) {
                 DPIEFunction.removeFlag(p, args[1]);
             } else {
-                p.sendMessage(prefix + "Usage: /die removeflag <flag>");
+                p.sendMessage(prefix + lang.get("usage_removeflag"));
             }
         });
 
-        // 내구도
         builder.addSubCommand("durability", "dpie.durability", "/dpie durability <value>", true, (p, args) -> {
             if (args.length >= 2) {
                 DPIEFunction.setDurability(p, args[1]);
             } else {
-                p.sendMessage(prefix + "Usage: /die durability <value>");
+                p.sendMessage(prefix + lang.get("usage_durability"));
             }
         });
 
