@@ -19,18 +19,18 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("item_name_hold_item"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_name_hold_item"));
             return;
         }
         ItemMeta meta = item.getItemMeta();
         if (meta == null) {
-            p.sendMessage(prefix + lang.get("item_name_cannot_have_name"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_name_cannot_have_name"));
             return;
         }
         String name = ColorUtils.applyColor(String.join(" ", Arrays.copyOfRange(args, 1, args.length)));
         meta.setDisplayName(name);
         item.setItemMeta(meta);
-        p.sendMessage(prefix + lang.getWithArgs("item_name_set", name));
+        p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("item_name_set", name));
     }
 
     public static void addItemLore(CommandSender sender, String[] args) {
@@ -38,12 +38,12 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("item_lore_hold_item"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_hold_item"));
             return;
         }
         ItemMeta meta = item.getItemMeta();
         if (meta == null) {
-            p.sendMessage(prefix + lang.get("item_lore_cannot_have_lore"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_cannot_have_lore"));
             return;
         }
         String lore = ColorUtils.applyColor(String.join(" ", Arrays.copyOfRange(args, 1, args.length)));
@@ -51,7 +51,7 @@ public class DPIEFunction {
         loreList.add(lore);
         meta.setLore(loreList);
         item.setItemMeta(meta);
-        p.sendMessage(prefix + lang.getWithArgs("item_lore_added", lore));
+        p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("item_lore_added", lore));
     }
 
     public static void setItemLore(CommandSender sender, String line, String[] args) {
@@ -59,31 +59,31 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("item_lore_hold_item_set"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_hold_item_set"));
             return;
         }
         int lineNumber;
         try {
             lineNumber = Integer.parseInt(line) - 1;
         } catch (NumberFormatException e) {
-            p.sendMessage(prefix + lang.get("item_lore_invalid_line"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_invalid_line"));
             return;
         }
         ItemMeta meta = item.getItemMeta();
         if (meta == null) {
-            p.sendMessage(prefix + lang.get("item_lore_cannot_have_lore"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_cannot_have_lore"));
             return;
         }
         String lore = ColorUtils.applyColor(String.join(" ", Arrays.copyOfRange(args, 2, args.length)));
         java.util.List<String> loreList = meta.hasLore() && meta.getLore() != null ? new java.util.ArrayList<>(meta.getLore()) : new java.util.ArrayList<>();
         if (lineNumber < 0 || lineNumber >= loreList.size()) {
-            p.sendMessage(prefix + lang.get("item_lore_invalid_line_number"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_invalid_line_number"));
             return;
         }
         loreList.set(lineNumber, lore);
         meta.setLore(loreList);
         item.setItemMeta(meta);
-        p.sendMessage(prefix + lang.getWithArgs("item_lore_set", String.valueOf(lineNumber + 1), lore));
+        p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("item_lore_set", String.valueOf(lineNumber + 1), lore));
     }
 
     public static void removeItemLore(CommandSender sender, String line) {
@@ -91,30 +91,30 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("item_lore_hold_item_remove"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_hold_item_remove"));
             return;
         }
         int lineNumber;
         try {
             lineNumber = Integer.parseInt(line) - 1;
         } catch (NumberFormatException e) {
-            p.sendMessage(prefix + lang.get("item_lore_invalid_line"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_invalid_line"));
             return;
         }
         ItemMeta meta = item.getItemMeta();
         if (meta == null || !meta.hasLore() || meta.getLore() == null) {
-            p.sendMessage(prefix + lang.get("item_lore_no_lore_remove"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_no_lore_remove"));
             return;
         }
         java.util.List<String> loreList = new java.util.ArrayList<>(meta.getLore());
         if (lineNumber < 0 || lineNumber >= loreList.size()) {
-            p.sendMessage(prefix + lang.get("item_lore_invalid_line_number"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_invalid_line_number"));
             return;
         }
         loreList.remove(lineNumber);
         meta.setLore(loreList);
         item.setItemMeta(meta);
-        p.sendMessage(prefix + lang.getWithArgs("item_lore_removed", String.valueOf(lineNumber + 1)));
+        p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("item_lore_removed", String.valueOf(lineNumber + 1)));
     }
 
     public static void clearItemLore(CommandSender sender) {
@@ -122,17 +122,17 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("item_lore_hold_item_clear"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_hold_item_clear"));
             return;
         }
         ItemMeta meta = item.getItemMeta();
         if (meta == null || !meta.hasLore() || meta.getLore() == null || meta.getLore().isEmpty()) {
-            p.sendMessage(prefix + lang.get("item_lore_no_lore_clear"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_no_lore_clear"));
             return;
         }
         meta.setLore(null);
         item.setItemMeta(meta);
-        p.sendMessage(prefix + lang.get("item_lore_cleared"));
+        p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_lore_cleared"));
     }
 
     public static void setItemType(CommandSender sender, String type) {
@@ -140,14 +140,14 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("item_type_hold_item"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("item_type_hold_item"));
             return;
         }
         try {
             item.setType(org.bukkit.Material.valueOf(type.toUpperCase()));
-            p.sendMessage(prefix + lang.getWithArgs("item_type_set", type));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("item_type_set", type));
         } catch (IllegalArgumentException e) {
-            p.sendMessage(prefix + lang.getWithArgs("item_type_invalid", type));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("item_type_invalid", type));
         }
     }
 
@@ -156,21 +156,21 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("custom_model_data_hold_item"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("custom_model_data_hold_item"));
             return;
         }
         try {
             int data = Integer.parseInt(id);
             ItemMeta meta = item.getItemMeta();
             if (meta == null) {
-                p.sendMessage(prefix + lang.get("custom_model_data_cannot_have"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("custom_model_data_cannot_have"));
                 return;
             }
             meta.setCustomModelData(data);
             item.setItemMeta(meta);
-            p.sendMessage(prefix + lang.getWithArgs("custom_model_data_set", String.valueOf(data)));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("custom_model_data_set", String.valueOf(data)));
         } catch (NumberFormatException e) {
-            p.sendMessage(prefix + lang.get("custom_model_data_invalid"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("custom_model_data_invalid"));
         }
     }
 
@@ -179,17 +179,17 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("custom_model_data_hold_item_remove"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("custom_model_data_hold_item_remove"));
             return;
         }
         ItemMeta meta = item.getItemMeta();
         if (meta == null || !meta.hasCustomModelData()) {
-            p.sendMessage(prefix + lang.get("custom_model_data_no_data_remove"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("custom_model_data_no_data_remove"));
             return;
         }
         meta.setCustomModelData(null);
         item.setItemMeta(meta);
-        p.sendMessage(prefix + lang.get("custom_model_data_removed"));
+        p.sendMessage(plugin.getPrefix() + plugin.getLang().get("custom_model_data_removed"));
     }
 
     public static void addEnchantment(CommandSender sender, String enchantmentName, String level) {
@@ -197,26 +197,26 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("enchant_hold_item"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("enchant_hold_item"));
             return;
         }
         ItemMeta meta = item.getItemMeta();
         if (meta == null) {
-            p.sendMessage(prefix + lang.get("enchant_cannot_have"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("enchant_cannot_have"));
             return;
         }
         try {
             Enchantment enchantment = Enchantment.getByName(enchantmentName.toUpperCase());
             if (enchantment == null) {
-                p.sendMessage(prefix + lang.getWithArgs("enchant_invalid", enchantmentName));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("enchant_invalid", enchantmentName));
                 return;
             }
             int enchantmentLevel = Integer.parseInt(level);
             meta.addEnchant(enchantment, enchantmentLevel, true);
             item.setItemMeta(meta);
-            p.sendMessage(prefix + lang.getWithArgs("enchant_added", enchantmentName, String.valueOf(enchantmentLevel)));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("enchant_added", enchantmentName, String.valueOf(enchantmentLevel)));
         } catch (NumberFormatException e) {
-            p.sendMessage(prefix + lang.getWithArgs("enchant_invalid_level", level));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("enchant_invalid_level", level));
         }
     }
 
@@ -225,22 +225,22 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("enchant_hold_item_remove"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("enchant_hold_item_remove"));
             return;
         }
         ItemMeta meta = item.getItemMeta();
         if (meta == null || !meta.hasEnchants()) {
-            p.sendMessage(prefix + lang.get("enchant_no_enchants_remove"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("enchant_no_enchants_remove"));
             return;
         }
         Enchantment enchantment = Enchantment.getByName(enchantmentName.toUpperCase());
         if (enchantment == null) {
-            p.sendMessage(prefix + lang.getWithArgs("enchant_invalid", enchantmentName));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("enchant_invalid", enchantmentName));
             return;
         }
         meta.removeEnchant(enchantment);
         item.setItemMeta(meta);
-        p.sendMessage(prefix + lang.getWithArgs("enchant_removed", enchantmentName));
+        p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("enchant_removed", enchantmentName));
     }
 
     public static void addFlag(CommandSender sender, String flag) {
@@ -248,25 +248,25 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("flag_hold_item_add"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("flag_hold_item_add"));
             return;
         }
         ItemMeta meta = item.getItemMeta();
         if (meta == null) {
-            p.sendMessage(prefix + lang.get("flag_cannot_have"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("flag_cannot_have"));
             return;
         }
         try {
             ItemFlag itemFlag = ItemFlag.valueOf(flag.toUpperCase());
             if (meta.hasItemFlag(itemFlag)) {
-                p.sendMessage(prefix + lang.getWithArgs("flag_already_has", flag));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("flag_already_has", flag));
                 return;
             }
             meta.addItemFlags(itemFlag);
             item.setItemMeta(meta);
-            p.sendMessage(prefix + lang.getWithArgs("flag_added", flag));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("flag_added", flag));
         } catch (IllegalArgumentException e) {
-            p.sendMessage(prefix + lang.getWithArgs("flag_invalid", flag));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("flag_invalid", flag));
         }
     }
 
@@ -281,25 +281,25 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("flag_hold_item_remove"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("flag_hold_item_remove"));
             return;
         }
         ItemMeta meta = item.getItemMeta();
         if (meta == null || meta.getItemFlags().isEmpty()) {
-            p.sendMessage(prefix + lang.get("flag_no_flags_remove"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("flag_no_flags_remove"));
             return;
         }
         try {
             ItemFlag itemFlag = ItemFlag.valueOf(flag.toUpperCase());
             if (!meta.hasItemFlag(itemFlag)) {
-                p.sendMessage(prefix + lang.getWithArgs("flag_does_not_have", flag));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("flag_does_not_have", flag));
                 return;
             }
             meta.removeItemFlags(itemFlag);
             item.setItemMeta(meta);
-            p.sendMessage(prefix + lang.getWithArgs("flag_removed", flag));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("flag_removed", flag));
         } catch (IllegalArgumentException e) {
-            p.sendMessage(prefix + lang.getWithArgs("flag_invalid", flag));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("flag_invalid", flag));
         }
     }
 
@@ -308,19 +308,19 @@ public class DPIEFunction {
         Player p = (Player) sender;
         ItemStack item = p.getInventory().getItemInMainHand();
         if (item == null || item.getType().isAir()) {
-            p.sendMessage(prefix + lang.get("durability_hold_item"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("durability_hold_item"));
             return;
         }
         try {
             int dur = Integer.parseInt(durability);
             if (dur < 0 || dur > item.getType().getMaxDurability()) {
-                p.sendMessage(prefix + lang.getWithArgs("durability_invalid_value", String.valueOf(item.getType().getMaxDurability())));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("durability_invalid_value", String.valueOf(item.getType().getMaxDurability())));
                 return;
             }
             item.setDurability((short) dur);
-            p.sendMessage(prefix + lang.getWithArgs("durability_set", String.valueOf(dur)));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().getWithArgs("durability_set", String.valueOf(dur)));
         } catch (NumberFormatException e) {
-            p.sendMessage(prefix + lang.get("durability_invalid_number"));
+            p.sendMessage(plugin.getPrefix() + plugin.getLang().get("durability_invalid_number"));
         }
     }
 }

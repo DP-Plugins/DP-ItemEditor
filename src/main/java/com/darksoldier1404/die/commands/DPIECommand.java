@@ -11,113 +11,126 @@ import java.util.stream.Collectors;
 import static com.darksoldier1404.die.ItemEditor.*;
 
 public class DPIECommand {
-    private final CommandBuilder builder = new CommandBuilder(prefix);
+    private final CommandBuilder builder = new CommandBuilder(plugin);
 
     public DPIECommand() {
         builder.addSubCommand("name", "dpie.name", "/dpie name <item display name>", true, (p, args) -> {
             if (args.length >= 2) {
                 DPIEFunction.setItemName(p, args);
             } else {
-                p.sendMessage(prefix + lang.get("usage_name"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("usage_name"));
             }
+            return true;
         });
         builder.addSubCommand("loreadd", "dpie.lore", "/dpie loreadd <item lore>", true, (p, args) -> {
             if (args.length >= 2) {
                 DPIEFunction.addItemLore(p, args);
             } else {
-                p.sendMessage(prefix + lang.get("usage_loreadd"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("usage_loreadd"));
             }
+            return true;
         });
         builder.addSubCommand("loreset", "dpie.lore", "/dpie loreset <index> <item lore>", true, (p, args) -> {
             if (args.length >= 3) {
                 String line = args[1];
                 if (!line.matches("\\d+")) {
-                    p.sendMessage(prefix + lang.get("invalid_index"));
-                    return;
+                    p.sendMessage(plugin.getPrefix() + plugin.getLang().get("invalid_index"));
+                    return false;
                 }
                 DPIEFunction.setItemLore(p, line, args);
             } else {
-                p.sendMessage(prefix + lang.get("usage_loreset"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("usage_loreset"));
             }
+            return true;
         });
         builder.addSubCommand("loredel", "dpie.lore", "/dpie loredel <index>", true, (p, args) -> {
             if (args.length >= 2) {
                 String line = args[1];
                 if (!line.matches("\\d+")) {
-                    p.sendMessage(prefix + lang.get("invalid_index"));
-                    return;
+                    p.sendMessage(plugin.getPrefix() + plugin.getLang().get("invalid_index"));
+                    return false;
                 }
                 DPIEFunction.removeItemLore(p, line);
             } else {
-                p.sendMessage(prefix + lang.get("usage_loredel"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("usage_loredel"));
             }
+            return true;
         });
         builder.addSubCommand("loreclear", "dpie.lore", "/dpie loreclear", true, (p, args) -> {
             DPIEFunction.clearItemLore(p);
+            return true;
         });
 
         builder.addSubCommand("type", "dpie.type", "/dpie type <item material>", true, (p, args) -> {
             if (args.length >= 2) {
                 DPIEFunction.setItemType(p, args[1]);
             } else {
-                p.sendMessage(prefix + lang.get("usage_type"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("usage_type"));
             }
+            return true;
         });
 
         builder.addSubCommand("custommodeldata", "dpie.custommodeldata", "/dpie custommodeldata <Integer>", true, (p, args) -> {
             if (args.length >= 2) {
                 DPIEFunction.setCustomModelData(p, args[1]);
             } else {
-                p.sendMessage(prefix + lang.get("usage_custommodeldata"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("usage_custommodeldata"));
             }
+            return true;
         });
 
         builder.addSubCommand("custommodeldataremove", "dpie.custommodeldataremove", "/dpie custommodeldataremove <Integer>", true, (p, args) -> {
             if (args.length >= 1) {
                 DPIEFunction.removeCustomModelData(p);
             } else {
-                p.sendMessage(prefix + lang.get("usage_custommodeldataremove"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("usage_custommodeldataremove"));
             }
+            return true;
         });
 
         builder.addSubCommand("enchant", "dpie.enchant", "/dpie enchant <enchantment> <level>", true, (p, args) -> {
             if (args.length >= 3) {
                 DPIEFunction.addEnchantment(p, args[1], args[2]);
             } else {
-                p.sendMessage(prefix + lang.get("usage_enchant"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("usage_enchant"));
             }
+            return true;
         });
 
         builder.addSubCommand("enchantremove", "dpie.enchantremove", "/dpie enchantremove <enchantment>", true, (p, args) -> {
             if (args.length >= 2) {
                 DPIEFunction.removeEnchantment(p, args[1]);
             } else {
-                p.sendMessage(prefix + lang.get("usage_enchantremove"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("usage_enchantremove"));
             }
+            return true;
         });
 
         builder.addSubCommand("addflag", "dpie.addflag", "/dpie addflag <flag>", true, (p, args) -> {
             if (args.length >= 2) {
                 DPIEFunction.addFlag(p, args[1]);
             } else {
-                p.sendMessage(prefix + lang.get("usage_addflag"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("usage_addflag"));
             }
+            return true;
         });
 
         builder.addSubCommand("removeflag", "dpie.removeflag", "/dpie removeflag <flag>", true, (p, args) -> {
             if (args.length >= 2) {
                 DPIEFunction.removeFlag(p, args[1]);
             } else {
-                p.sendMessage(prefix + lang.get("usage_removeflag"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("usage_removeflag"));
             }
+            return true;
         });
 
         builder.addSubCommand("durability", "dpie.durability", "/dpie durability <value>", true, (p, args) -> {
             if (args.length >= 2) {
                 DPIEFunction.setDurability(p, args[1]);
             } else {
-                p.sendMessage(prefix + lang.get("usage_durability"));
+                p.sendMessage(plugin.getPrefix() + plugin.getLang().get("usage_durability"));
             }
+            return true;
         });
 
         for (String c : builder.getSubCommandNames()) {
